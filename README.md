@@ -1,8 +1,8 @@
 ## A Mongoose in-memory autocomplete
 
 This module will:
-1. Fetch from mongodb the data you wish to autocomplete.
-2. Insert this data in a prefix tree in memory.
+* Fetch from mongodb the data you wish to autocomplete.
+* Insert this data in a prefix tree in memory.
 
 You can also bind data to a word inserted in the datastructure. 
 
