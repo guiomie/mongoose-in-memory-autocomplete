@@ -22,6 +22,8 @@ var autoComplete = (function(){
       
       for(var i = 0; i < docs.length; i++){
         var wordWithData = buildInsertableData(docs[i]);
+        console.log(wordWithData.word + " - " + wordWithData.data);
+        console.log(JSON.stringify(wordWithData));
         cachedData.addWordWithData(wordWithData.word, wordWithData.data);
       }
       
@@ -35,7 +37,12 @@ var autoComplete = (function(){
    var data = [];
    
     configuration.autoCompleteFields.forEach(function(item){
-       word += " " + doc[item];
+       if(word === ""){
+        word = doc[item];
+       }
+       else{
+        word += " " + doc[item];
+       }
     });
     
     configuration.dataFields.forEach(function(item){
