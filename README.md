@@ -32,7 +32,11 @@ var myMembersAutoComplete = new AutoComplete(configuration, function(){
 });
 
 //Finding in the autocomplete
-myMembersAutoComplete.getResults(prefix, function(err, words){
+//
+// Lets say we have in mongodb a document -> { firstName : "James", lastName: "Green", _id: "535f06a28ddfa3880f000003"}
+// getResults will return words -> [{"word": "gfgfnf2 gnfhdh2","data": ["535f06a28ddfa3880f000003"]}]
+//
+myMembersAutoComplete.getResults("Jam", function(err, words){
   if(err)
     res.json(err);
   else
