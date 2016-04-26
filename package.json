@@ -1,0 +1,7 @@
+{
+  "name": "mongoose-in-memory-autocomplete",
+  "version": "1.0.0",
+  "dependencies": {
+    "mongoose": "3.8.11"
+  }
+}
