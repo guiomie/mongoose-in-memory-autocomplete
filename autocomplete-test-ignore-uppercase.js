@@ -32,10 +32,10 @@ NamesModel.create(testNames, function (err, data) {
       process.stdout.write("Test 1. Constructor Validation - Size is right... ");
       var elementsInCache = autoCompleteInstance.getCacheSize();
       assert.equal(testNames.length, elementsInCache, "Cache size returned invalid");
-      console.log("Passed !");
+      console.log("Pass !");
 
-      autoCompleteInstance.getResults("Mar", function(err, res){
-        process.stdout.write("Test 2. GetResults - Retrieve words for 'Mar'... ");
+      autoCompleteInstance.getResults("mar", function(err, res){
+        process.stdout.write("Test 2. GetResults - Retrieve words for 'mar '... ");
 
         if(err){
           console.log("Callback returned an error: " + err);
@@ -43,7 +43,7 @@ NamesModel.create(testNames, function (err, data) {
         else{
           assert.equal(res[1].word, "Marco Polo", "Wrong value returned");
           assert.equal(res[0].word, "Marcus Aurélius", "Wrong value returned");
-          console.log("Passed !");
+          console.log("Pass !");
         }
 
         testTearDown();

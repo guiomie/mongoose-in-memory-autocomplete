@@ -13,19 +13,19 @@ var testNameValues = [
     firstName : 'Marco',
     lastName : 'Polo'
   }),
-   new CacheModel({
+  new CacheModel({
     firstName : "Marcus",
     lastName : "Aurélius"
   }),
-    new CacheModel({
+  new CacheModel({
     firstName : 'Foo',
     lastName : 'Bar'
   }),
-    new CacheModel({
+  new CacheModel({
     firstName : 'Floyd',
     lastName : 'Brown'
   }),
-    new CacheModel({
+  new CacheModel({
     firstName : 'Molly',
     lastName : 'West'
   })

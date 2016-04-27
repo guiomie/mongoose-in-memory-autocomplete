@@ -6,73 +6,92 @@ var autoComplete = (function(){
   var nbrCachedItems = 0;
   var maximumResults = 10;
   var configuration = {};
-  
+
   var constructor = function(config, callback){
     configuration = config;
     buildCache(callback);
   };
-  
+
   function buildCache(done){
     configuration.model.aggregate(buildAggregateQuery(), aggregateResult);
-    
+
     function aggregateResult(err, docs){
       if(err){
         console.log("Error initializing autocomplete cache");
       }
-      
+
       for(var i = 0; i < docs.length; i++){
         var wordWithData = buildInsertableData(docs[i]);
-        console.log(wordWithData.word + " - " + wordWithData.data);
-        console.log(JSON.stringify(wordWithData));
         cachedData.addWordWithData(wordWithData.word, wordWithData.data);
       }
-      
+
       nbrCachedItems = docs.length;
       done();
     }
   };
-  
+
   function buildInsertableData(doc){
-   var word = "";
-   var data = [];
-   
+    var word = "";
+    var lowerCased = "";
+    var data = [];
+
     configuration.autoCompleteFields.forEach(function(item){
-       if(word === ""){
+      if(word === ""){
+        lowerCased = doc[item].toLowerCase();
         word = doc[item];
-       }
-       else{
+      }
+      else{
+        lowerCased += " " + doc[item].toLowerCase();
         word += " " + doc[item];
-       }
+      }
     });
-    
+
     configuration.dataFields.forEach(function(item){
-       data.push(doc[item]);
+      data.push(doc[item]);
     });
-    return {"word": word, "data": data};
+
+    var itemToCache = {"word": lowerCased, "data": data};
+    itemToCache.data.originalWord = word;
+    return itemToCache;
   };
-  
+
   function buildAggregateQuery(){
     var aggregateTemplate = [{ $project: {} }];
-    
+
     configuration.autoCompleteFields.forEach(function(item){
       aggregateTemplate[0].$project[item] = 1;
     });
-    
+
     configuration.dataFields.forEach(function(item){
-       aggregateTemplate[0].$project[item] = 1;
+      aggregateTemplate[0].$project[item] = 1;
     });
     return aggregateTemplate;
   };
-  
+
+  function RebuildToOriginalContent(content){
+    var newarray = [];
+    content.forEach(function(item){
+      newarray.unshift({ word: item.data.originalWord, data: item.data});
+    });
+    return newarray;
+  }
+
   constructor.prototype = {
-    getResults: function(string, resultCallback){
-      cachedData.getWordsWithData(string, maximumResults, resultCallback);
+    getResults: function(string, cb){
+      cachedData.getWordsWithData(string.toLowerCase(), maximumResults, function(err, result){
+        if(err){
+          cb(err);
+        }
+        else{
+          cb(null, RebuildToOriginalContent(result));
+        }
+      });
     },
     getCacheSize: function(){
       return nbrCachedItems;
     }
   };
-  
+
   return constructor;
 })();
 
