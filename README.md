@@ -9,6 +9,11 @@ This module will:
 
 1.1 -> Now supports case sensitivity. Ex: mar or Mar both would return Marcus
 
+## Test
+
+1. Have mongodb running
+2. Run both autocomplete-test.js and autocomplete-test-ignore-uppercase.js
+
 ## Usage
 
 ```
@@ -24,7 +29,7 @@ var MembersModel = mongoose.model('MembersModel', membersSchema);
 // Autocomplete configuration
 var configuration = {
 	//Fields being autocompleted, they will be concatenated
-  autoCompleteFields : [ "firstName", "lastName"],
+	autoCompleteFields : [ "firstName", "lastName"],
 	//Returned data with autocompleted results
 	dataFields: ["_id"],
 	//Maximum number of results to return with an autocomplete request
