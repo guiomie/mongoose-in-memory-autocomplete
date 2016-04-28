@@ -29,6 +29,10 @@ var testNameValues = [
     firstName : 'Johnny',
     lastName : 'Barrette'
   }),
+	new CacheModel({
+    firstName : 'Aurelia',
+    lastName : 'Djokstud'
+  }),
   new CacheModel({
     firstName : 'Molly',
     lastName : 'West'
