@@ -12,7 +12,11 @@ This module will:
 ## Test
 
 1. Have mongodb running
-2. Run both autocomplete-test.js and autocomplete-test-ignore-uppercase.js
+2. Run tests (node ....js):
+	autocomplete-test.js
+	autocomplete-test-ignore-uppercase.js
+	autocomplete-test-inverted-names.js
+	fullname-autocomplete-test.js
 
 ## Usage
 
