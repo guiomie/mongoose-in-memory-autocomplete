@@ -13,22 +13,19 @@ var autoComplete = (function(){
   };
 
   function buildCache(done){
-console.log("in build cache")
     configuration.model.aggregate(buildAggregateQuery(), aggregateResult);
-console.log("post model")
+
     function aggregateResult(err, docs){
-console.log("1");
       if(err){
         console.log("Error initializing autocomplete cache");
+        done(err); //?
       }
-console.log("2");
       for(var i = 0; i < docs.length; i++){
         var wordWithData = buildInsertableData(docs[i]);
         cachedData.addWordWithData(wordWithData.word, wordWithData.data);
       }
-console.log("3");
       nbrCachedItems = docs.length;
-      done();
+      done(null);
     }
   };
 

@@ -12,32 +12,35 @@ var fullnameAutocomplete = (function(){
 
   var constructor = function(config, done){
     duplicateEntryHint = config.duplicateHint;
-    console.log("in constructor");
-    InitFirstNameAutoComplete(config, function(err){
-      if(err)
-        done(err);
 
-      console.log("in InitFirstNameAutoComplete");
-      InitLastNameAutoComplete(config, done);
+    InitFirstNameAutoComplete(config, function(err){
+      if(err){
+        done(err);
+      }
+      else{
+        InitLastNameAutoComplete(config, function(){
+          done();
+        });
+      }
     });
   };
 
   function InitFirstNameAutoComplete(config, callback){
     var configuration = {
-      autoCompleteFields : [ config.firstNameParam, config.lastNameParam],
+      autoCompleteFields : [config.firstNameParam, config.lastNameParam],
       dataFields: [config.dataFields],
       maximumResults: config.maximumResults,
-      model: config.NamesModel
+      model: config.model
     };
     firstNameAutoComplete = new Autocomplete(configuration, callback);
   }
 
   function InitLastNameAutoComplete(config, callback){
     var configuration = {
-      autoCompleteFields : [ config.lastNameParam, config.firstNameParam],
+      autoCompleteFields : [config.lastNameParam, config.firstNameParam],
       dataFields: [config.dataFields],
       maximumResults: config.maximumResults,
-      model: config.NamesModel
+      model: config.model
     };
     lastNameAutoComplete = new Autocomplete(configuration, callback);
   }
@@ -50,7 +53,7 @@ var fullnameAutocomplete = (function(){
       FlagAsAlreadyResulted(item);
     });
 
-    firstNameResults.forEach(function(item){
+    lastNameResults.forEach(function(item){
       if(!itemsAlreadyReturned[item[duplicateEntryHint]]){
         FlagAsAlreadyResulted(item);
       };
