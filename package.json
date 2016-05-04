@@ -1,6 +1,7 @@
 {
   "name": "mongoose-in-memory-autocomplete",
-  "version": "1.2.0",
+  "main" : "./main.js",
+  "version": "1.2.1",
   "dependencies": {
     "mongoose": "3.8.11"
   },

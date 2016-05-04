@@ -1,0 +1,97 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /home/guiomie/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package.tgz',
+10 verbose tar pack   '.' ]
+11 verbose tarball /home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package.tgz
+12 verbose folder .
+13 info prepublish mongoose-in-memory-autocomplete@1.2.1
+14 silly lockFile 1f1177db-tar tar://.
+15 verbose lock tar://. /home/guiomie/.npm/1f1177db-tar.lock
+16 silly lockFile 80970682-y-autocomplete-1-2-1-package-tgz tar:///home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package.tgz
+17 verbose lock tar:///home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package.tgz /home/guiomie/.npm/80970682-y-autocomplete-1-2-1-package-tgz.lock
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile 80970682-y-autocomplete-1-2-1-package-tgz tar:///home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package.tgz
+21 silly lockFile 80970682-y-autocomplete-1-2-1-package-tgz tar:///home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package.tgz
+22 silly lockFile 9952ba3b-emory-autocomplete-1-2-1-package /home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package
+23 verbose lock /home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package /home/guiomie/.npm/9952ba3b-emory-autocomplete-1-2-1-package.lock
+24 silly lockFile 9952ba3b-emory-autocomplete-1-2-1-package /home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package
+25 silly lockFile 9952ba3b-emory-autocomplete-1-2-1-package /home/guiomie/.npm/mongoose-in-memory-autocomplete/1.2.1/package
+26 silly lockFile 3a52ce78- .
+27 silly lockFile 3a52ce78- .
+28 silly publish { name: 'mongoose-in-memory-autocomplete',
+28 silly publish   main: './main.js',
+28 silly publish   version: '1.2.1',
+28 silly publish   dependencies: { mongoose: '3.8.11' },
+28 silly publish   devDependencies: { rewire: '2.5.1' },
+28 silly publish   readme: '## A Mongoose in-memory autocomplete\n\nThis module will:\n* Fetch from mongodb the data you wish to autocomplete and insert this data in a prefix tree in memory.\n* Return all words starting with the requested string (autocomplete)\n* You can also bind data to a word inserted in the datastructure. (ex: an indexed id)\n\n## History\n\n1.1 -> Now supports case sensitivity. Ex: mar or Mar both would return Marcus\n\n## Test\n\n1. Have mongodb running\n2. Run tests (node ....js):\n\tautocomplete-test.js\n\tautocomplete-test-ignore-uppercase.js\n\tautocomplete-test-inverted-names.js\n\tfullname-autocomplete-test.js\n\n## Usage\n\n```\n\n//A Mongoose configuration is required\nvar membersSchema = Schema({\n\tfirstName : { type: String, required: true},\n\tlastName : { type: String, required: true }\n});\n\nvar MembersModel = mongoose.model(\'MembersModel\', membersSchema);\n\n// Autocomplete configuration\nvar configuration = {\n\t//Fields being autocompleted, they will be concatenated\n\tautoCompleteFields : [ "firstName", "lastName"],\n\t//Returned data with autocompleted results\n\tdataFields: ["_id"],\n\t//Maximum number of results to return with an autocomplete request\n\tmaximumResults: 10,\n\t//MongoDB model (defined earlier) that will be used for autoCompleteFields and dataFields\n\tmodel: MembersModel\n}\n\n//initialization of AutoComplete Module\nvar myMembersAutoComplete = new AutoComplete(configuration, function(){\n  //any calls required after the initialization\n  console.log("Loaded " + myMembersAutoComplete.getCacheSize() + " words in auto complete");\n});\n\n//Finding in the autocomplete\n//\n// Lets say we have in mongodb a document -> { firstName : "James", lastName: "Green", _id: "535f06a28ddfa3880f000003"}\n// getResults will return words -> [{"word": "James Green","data": ["535f06a28ddfa3880f000003"]}]\n//\nmyMembersAutoComplete.getResults("Jam", function(err, words){\n  if(err)\n    res.json(err);\n  else\n    res.json(words);\n});\n\n```\n',
+28 silly publish   readmeFilename: 'README.md',
+28 silly publish   gitHead: '4fe128737c49380b1422bf6029ba51730733ac01',
+28 silly publish   description: 'This module will: * Fetch from mongodb the data you wish to autocomplete and insert this data in a prefix tree in memory. * Return all words starting with the requested string (autocomplete) * You can also bind data to a word inserted in the datastructure. (ex: an indexed id)',
+28 silly publish   _id: 'mongoose-in-memory-autocomplete@1.2.1',
+28 silly publish   scripts: {},
+28 silly publish   _shasum: '1c36d6b1946d27fe90e0601f08db6506fb030ba6',
+28 silly publish   _from: '.' }
+29 verbose request where is /mongoose-in-memory-autocomplete
+30 verbose request registry https://registry.npmjs.org/
+31 verbose request id 9d07727e0a55dfb3
+32 verbose url raw /mongoose-in-memory-autocomplete
+33 verbose url resolving [ 'https://registry.npmjs.org/',
+33 verbose url resolving   './mongoose-in-memory-autocomplete' ]
+34 verbose url resolved https://registry.npmjs.org/mongoose-in-memory-autocomplete
+35 verbose request where is https://registry.npmjs.org/mongoose-in-memory-autocomplete
+36 info trying registry request attempt 1 at 20:48:27
+37 http PUT https://registry.npmjs.org/mongoose-in-memory-autocomplete
+38 http 403 https://registry.npmjs.org/mongoose-in-memory-autocomplete
+39 verbose headers { 'content-type': 'application/json',
+39 verbose headers   'cache-control': 'max-age=300',
+39 verbose headers   'content-length': '95',
+39 verbose headers   'accept-ranges': 'bytes',
+39 verbose headers   date: 'Wed, 04 May 2016 03:48:27 GMT',
+39 verbose headers   via: '1.1 varnish',
+39 verbose headers   connection: 'keep-alive',
+39 verbose headers   'x-served-by': 'cache-sjc3131-SJC',
+39 verbose headers   'x-cache': 'MISS',
+39 verbose headers   'x-cache-hits': '0',
+39 verbose headers   'x-timer': 'S1462333707.780699,VS0,VE209',
+39 verbose headers   vary: 'Accept-Encoding' }
+40 error publish Failed PUT 403
+41 error Error: "You cannot publish over the previously published version 1.2.1." : mongoose-in-memory-autocomplete
+41 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:300:14)
+41 error     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:238:65)
+41 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:123:22)
+41 error     at Request.emit (events.js:98:17)
+41 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:893:14)
+41 error     at Request.emit (events.js:117:20)
+41 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:844:12)
+41 error     at IncomingMessage.emit (events.js:117:20)
+41 error     at _stream_readable.js:938:16
+41 error     at process._tickCallback (node.js:419:13)
+42 error If you need help, you may report this *entire* log,
+42 error including the npm and node versions, at:
+42 error     <http://github.com/npm/npm/issues>
+43 error System Linux 3.10.18
+44 error command "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+45 error cwd /home/guiomie/mima
+46 error node -v v0.10.30
+47 error npm -v 1.4.21
+48 verbose exit [ 1, true ]
