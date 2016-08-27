@@ -39,7 +39,11 @@ var configuration = {
 	//Maximum number of results to return with an autocomplete request
 	maximumResults: 10,
 	//MongoDB model (defined earlier) that will be used for autoCompleteFields and dataFields
-	model: MembersModel
+	model: MembersModel,
+	filter: {
+		publicProfile: true,
+		age: { $gt: 18 }
+	}
 }
 
 //initialization of AutoComplete Module
