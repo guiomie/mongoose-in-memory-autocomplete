@@ -55,14 +55,17 @@ var autoComplete = (function(){
   };
 
   function buildAggregateQuery(){
-    var aggregateTemplate = [{ $project: {} }];
+    var aggregateTemplate = [
+      { $match: configuration.filter || {} },
+      { $project: {} }
+    ];
 
     configuration.autoCompleteFields.forEach(function(item){
-      aggregateTemplate[0].$project[item] = 1;
+      aggregateTemplate[1].$project[item] = 1;
     });
 
     configuration.dataFields.forEach(function(item){
-      aggregateTemplate[0].$project[item] = 1;
+      aggregateTemplate[1].$project[item] = 1;
     });
 
     return aggregateTemplate;
