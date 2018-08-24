@@ -13,19 +13,28 @@ var autoComplete = (function(){
   };
 
   function buildCache(done){
-    configuration.model.aggregate(buildAggregateQuery(), aggregateResult);
+    configuration.model.aggregate(configuration.aggregationQuery ?
+    configuration.aggregationQuery :
+    buildAggregateQuery(),
+    aggregateResult);
 
     function aggregateResult(err, docs){
       if(err){
         console.log("Error initializing autocomplete cache");
-        done(err); //?
+        if(done) {
+            done(err);
+        }
       }
       for(var i = 0; i < docs.length; i++){
         var wordWithData = buildInsertableData(docs[i]);
-        cachedData.addWordWithData(wordWithData.word, wordWithData.data);
+        if(wordWithData.word) {
+            cachedData.addWordWithData(wordWithData.word, wordWithData.data);
+        }
       }
       nbrCachedItems = docs.length;
-      done(null);
+      if(done) {
+        done(null);
+      }
     }
   };
 
@@ -33,16 +42,17 @@ var autoComplete = (function(){
     var word = "";
     var lowerCased = "";
     var data = [];
-
     configuration.autoCompleteFields.forEach(function(item){
-      if(word === ""){
-        lowerCased = doc[item].toLowerCase();
-        word = doc[item];
-      }
-      else{
-        lowerCased += " " + doc[item].toLowerCase();
-        word += " " + doc[item];
-      }
+        if(doc[item]){
+          if(word === ""){
+            lowerCased = doc[item].toLowerCase();
+            word = doc[item];
+          }
+          else{
+            lowerCased += " " + doc[item].toLowerCase();
+            word += " " + doc[item];
+          }
+        }
     });
 
     configuration.dataFields.forEach(function(item){
@@ -78,12 +88,14 @@ var autoComplete = (function(){
 
   constructor.prototype = {
     getResults: function(string, cb){
-      cachedData.getWordsWithData(string.toLowerCase(), maximumResults, function(err, result){
-        if(err){
-          cb(err);
-        }
-        else{
-          cb(null, RebuildToOriginalContent(result));
+      cachedData.getWordsWithData(string ? string.toLowerCase() : '', maximumResults, function(err, result){
+        if(cb) {
+            if(err){
+              cb(err);
+            }
+            else{
+              cb(null, RebuildToOriginalContent(result));
+            }
         }
       });
     },
